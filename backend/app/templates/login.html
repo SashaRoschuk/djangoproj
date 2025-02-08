@@ -1,0 +1,8 @@
+<h1>Вітаємо, {{ user.username }}!</h1>
+<form method="post">
+    {% csrf_token %}
+    <input type="text" name="username" placeholder="Логін" required>
+    <input type="password" name="password" placeholder="Пароль" required>
+    <button type="submit">Увійти</button>
+</form>
+<a href="{% url 'register' %}">Немає акаунту? Реєстрація</a>
