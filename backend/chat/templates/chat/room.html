@@ -14,15 +14,30 @@
     {{ room_name|json_script:"room-name" }}
     {{ username|json_script:"username" }}
     <script>
+
+        const protocol = window.location.protocol === "https:" ? "wss://" : "ws://";
+        const host = window.location.host; // автоматично бере домен з адреси
+
         const roomName = JSON.parse(document.getElementById('room-name').textContent);
         const username = JSON.parse(document.getElementById('username').textContent);
+
         const chatSocket = new WebSocket(
-            'ws://'
-            + window.location.host
-            + '/ws/chat/'
-            + roomName
-            + '/'
+            protocol + host + '/ws/chat/' + roomName + '/'
         );
+        // const chatSocket = new WebSocket(
+        //     'ws://'
+        //     + window.location.host
+        //     + '/ws/chat/'
+        //     + roomName
+        //     + '/'
+        // );
+        // const chatSocket = new WebSocket(
+        //     'wss://'
+        //     + '656e-91-214-137-189.ngrok-free.app'
+        //     + '/ws/chat/'
+        //     + roomName
+        //     + '/'
+        // );
 
         chatSocket.onmessage = function(e) {
             const data = JSON.parse(e.data);

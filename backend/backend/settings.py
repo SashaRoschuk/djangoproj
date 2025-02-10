@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-(viy_lp90z7hzn15b6t0lzmqnmz9jg_oyo+%fl=u+q86b+(#yq
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -128,8 +128,21 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'app.CustomUser'
 
 ASGI_APPLICATION = "backend.asgi.application"
+
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels_redis.core.RedisChannelLayer",
+#         "CONFIG": {
+#             "hosts": [("127.0.0.1", 6379)],
+#         },
+#     },
+# }
+
 CHANNEL_LAYERS = {
     "default": {
-        "BACKEND": "channels.layers.InMemoryChannelLayer"
-    }
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": ["rediss://red-cul30d8gph6c738f6k1g:yTysAUbYDJluDN69xeIr3MnHQxHPa91t@frankfurt-redis.render.com:6379"],
+        },
+    },
 }
